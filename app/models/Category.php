@@ -11,6 +11,7 @@ class Category extends Ardent
 	protected $fillable = array('name','points','color_category_id');
 	
 	//Set the relationships a.k.a foreign keys	
+	
 	public function color_category()
 	{
 		return $this->hasOne('color_category');
@@ -22,9 +23,12 @@ class Category extends Ardent
 	}
 	
 	// Set validation rules
+	
+	
 	public static $rules = array(
-		'name'=>'required|alpha|min:3',
-		'points' => 'numeric'
+		'name'=>'required|min:3',
+		'points' => 'required',
+		'color_category_id' => 'required'
 	);
 	
 }

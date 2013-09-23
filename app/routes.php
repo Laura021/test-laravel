@@ -17,12 +17,48 @@ Route::get('/', function()
 	//return 'Hello!';
 });
 
+
+Route::get('/testModel', function(){
+	//Test users model.
+	
+	echo "Test user : ";
+	$user 			= new User;
+	$user->username = 'testUser1';
+	$user->email	= 'laura.com';
+	$user->title	= 'noob';
+	$user->bio		= 'Just some word about your life and bla bla';
+	
+	//var_dump($user->save());
+	//var_dump($user->errors()->all());
+	echo "</br></br>";
+	
+	echo "Color_category: ";
+	
+	$color_category					= new ColorCategory;
+	$color_category->title 			= 'BlueFive';
+	$color_category->description	= 'Things realted to the sea';
+	
+	//var_dump($color_category->save());
+	//var_dump($color_category->errors()->all());
+	echo "</br></br>";
+	
+	echo "Category: ";
+	$category			= new Category;
+	$category->name 	= 'First Category';
+	$category->points 	= '10';
+	$category->color_category_id = 1;
+	
+	//lvar_dump($category->save());
+	//var_dump($category->errors()->all());
+	echo "</br></br>";
+	
+	echo "Titles";
+	
+});
+
 Event::listen('404', function()
 {
     return Response::error('404');
 });
 
-
-//Route::controller('photo','PhotoController');
-//Route::get('photo','PhotoController@index');
 Route::resource('/photo', 'PhotoController');

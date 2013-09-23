@@ -2,7 +2,7 @@
 
 use LaravelBook\Ardent\Ardent;
 
-class Color_Category extends Ardernt
+class ColorCategory extends Ardent
 {
 	//Overrride custom table name
 	protected $table = 'color_category';
@@ -12,15 +12,17 @@ class Color_Category extends Ardernt
 	protected $fillable = array('title','description');
 
 	//Set inverse relationship
+	
 	public function category()
 	{
-		return $this->hasMany('Category');
+		return $this->belongsTo('Category');
 	}
 	
-	// Set rules.	
+	// Set rules.
+		
 	public static $rules = array(
-		'title'=>'required|alpha|min:3',
-		'description' => 'alpha'
+		'title'=>'required|min:3',
+		'description' => 'required|min:3'
 	);
 	
 }
