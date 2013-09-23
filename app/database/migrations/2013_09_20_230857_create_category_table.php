@@ -14,10 +14,12 @@ class CreateCategoryTable extends Migration {
 	{
 		Schema::create('category', function(Blueprint $t)
 		{
+			$t->engine = 'InnoDB';
+			
 			$t->increments('id');
 			$t->string('name');
 			$t->string('points');
-			$t->integer('color_category_id');			
+			$t->unsignedInteger('color_category_id');			
 			$t->timestamps();
 			
 			//FOREING KEYS ASSIGNATION

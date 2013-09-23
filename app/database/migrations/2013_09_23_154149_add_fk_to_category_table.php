@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddFkeCategoryTable extends Migration {
+class AddFkToCategoryTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,8 +13,9 @@ class AddFkeCategoryTable extends Migration {
 	{
 		Schema::table('category', function($t)
 		{
-			$t->foreign('color_category_id')->references('id')->on('color_category');
+			$t->foreign( 'color_category_id' )->references( 'id' )->on( 'color_category' );
 		});
+		
 	}
 
 	/**
@@ -24,7 +25,10 @@ class AddFkeCategoryTable extends Migration {
 	 */
 	public function down()
 	{
-		$t->dropForeign('category_color_category_id_foreign');
+		Schema::table('category', function($t)
+		{
+			$t->dropForeign('category_color_category_id_foreign');
+		});
 	}
 
 }

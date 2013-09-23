@@ -14,6 +14,8 @@ class CreateColorCategoryTable extends Migration {
 	{
 		Schema::create('color_category', function(Blueprint $t)
 		{
+			$t->engine = 'InnoDB';
+			
 			$t->increments('id');
 			$t->string('title');
 			$t->string('description');			

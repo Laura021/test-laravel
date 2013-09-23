@@ -14,6 +14,8 @@ class CreateUsersTable extends Migration {
 	{
 		Schema::create('users', function(Blueprint $t)
 		{
+			$t->engine = 'InnoDB';
+			
 			$t->increments('id');
 			$t->string('username');
 			$t->string('email');
