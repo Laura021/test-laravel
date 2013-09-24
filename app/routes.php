@@ -53,6 +53,30 @@ Route::get('/testModel', function(){
 	echo "</br></br>";
 	
 	echo "Titles";
+	$title 				= new Title;
+	$title->title 		= 'Dr.Goku';
+	$title->description = 'What dr Goku is capable of';
+	$title->points 		= 50;	
+	
+	var_dump($title->save());
+	var_dump($title->errors()->all());
+	echo "</br></br>";
+	
+	echo "Fact";
+	//array('title','description','source_name','source_url','image_url','category id');
+	$fact = new Fact;
+	$fact->title 		= 'Firts fact to upload';
+	$fact->description 	= 'Chalalalalala alalal  lalaa';
+	$fact->source_name	= 'Perez Hilton';
+	$fact->source_url	= 'http://www.juanjaua.com';
+	$fact->image_url	= 'juajuajua';
+	$fact->category_id	= 1;
+	$fact->user_id		= 1;
+	
+	var_dump($fact->save());
+	var_dump($fact->errors()->all());
+	echo "</br></br>";
+	
 	
 });
 
@@ -62,3 +86,6 @@ Event::listen('404', function()
 });
 
 Route::resource('/photo', 'PhotoController');
+
+Route::resource('/category', 'CategoryController');
+

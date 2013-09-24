@@ -15,7 +15,8 @@ class ColorCategory extends Ardent
 	
 	public function category()
 	{
-		return $this->belongsTo('Category');
+		//return $this->belongsTo('Category');
+		return $this->hasMany('Category');
 	}
 	
 	// Set rules.

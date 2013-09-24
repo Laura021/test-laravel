@@ -9,12 +9,10 @@ class Category extends Ardent
 		
 	//Set the data acccess property for the fields
 	protected $fillable = array('name','points','color_category_id');
-	
-	//Set the relationships a.k.a foreign keys	
-	
-	public function color_category()
+		
+	public function ColorCategory()
 	{
-		return $this->hasOne('color_category');
+		return $this->belongsTo('ColorCategory');
 	}
 	
 	public function facts()
@@ -22,9 +20,7 @@ class Category extends Ardent
 		return $this->hasMany('Facts');
 	}
 	
-	// Set validation rules
-	
-	
+	// Set validation rules	
 	public static $rules = array(
 		'name'=>'required|min:3',
 		'points' => 'required',

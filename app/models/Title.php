@@ -2,7 +2,7 @@
 
 use LaravelBook\Ardent\Ardent;
 
-class Title extends Ardernt
+class Title extends Ardent
 {
 	//Not need to overide database name
 	
@@ -15,9 +15,10 @@ class Title extends Ardernt
 	// Set rules
 	public static $rules = array
 	(
-		'title' =>'required|min:3|alpha_num',
-		'description' => 'alpha_num',
-		'points' => 'numeric'
+		'title' =>'required|min:3',
+		'description' => 'required',
+		'points' => 'numeric',
+		'award_picture_url' => 'required'
 	);
 }
 
