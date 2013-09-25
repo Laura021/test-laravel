@@ -7,9 +7,23 @@ class ColorCategoryController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	 
+	protected $color;
+	
+	public function __construct()
+	{
+	  $this->color = new ColorCategory;
+	}
+		 
+	 
 	public function index()
 	{
-		return ColorCategory::all();
+		$tpl = new stdClass;
+		
+		$tpl->colors =  $this->color->all();
+		
+		return View::make('entities.color.index',(array)$tpl);
+		
 	}
 
 	/**
@@ -19,7 +33,11 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$tpl = new stdClass;
+		
+		$tpl->color = $this->color;
+				
+		return View::make('entities.color.create',(array)$tpl);
 	}
 
 	/**
@@ -29,7 +47,11 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		
+		$result = $this->color->create($input);
+		
+		return Redirect::route('color.index');	
 	}
 
 	/**
@@ -40,6 +62,9 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		
+		//print_r(Input::all());
+		
 		if(Input::has('id'))
 		{
 			$id = Request::get('id');
@@ -48,7 +73,10 @@ class ColorCategoryController extends \BaseController {
 			
 			if($object)
 			{
-				return $object;
+				$tpl = new stdClass;
+				$tpl->color = $object;
+				
+				return View::make('entities.color.show',(array)$tpl);
 			}else
 			{
 				$message = array('message' =>'Object not found');
