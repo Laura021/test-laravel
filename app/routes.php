@@ -13,7 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('layout.master');
+	//return View::make('hello');
 	//return 'Hello!';
 });
 
@@ -88,4 +89,6 @@ Event::listen('404', function()
 Route::resource('/photo', 'PhotoController');
 
 Route::resource('/category', 'CategoryController');
+
+Route::resource('/color', 'ColorCategoryController');
 

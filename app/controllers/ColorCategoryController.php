@@ -1,6 +1,6 @@
 <?php
 
-class CategoryController extends \BaseController {
+class ColorCategoryController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,8 +9,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-		//This go and get the rlation info for eachr object, this is the equivalent od call all, and the query the id of the relation
-		return Category::with('ColorCategory')->get();	
+		return ColorCategory::all();
 	}
 
 	/**
@@ -30,19 +29,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function store()
 	{
-		$category						= new Category;
-		$category->name 				= Request::get('name');
-		$category->points 				= Request::get('points');
-		$category->color_category_id 	= 1;
-		
-		$category->save();
-				
-		var_dump($category->save());
-		var_dump($category->errors()->all());
-		
-		/*return Response::json(array(
-			'category' =>$category)
-		 );*/
+		//
 	}
 
 	/**
@@ -57,23 +44,22 @@ class CategoryController extends \BaseController {
 		{
 			$id = Request::get('id');
 		
-			$object =  Category::with('ColorCategory')->where('id', '=', $id)->get();		
+			$object =  ColorCategory::find($id);
 			
-			if($object->contains($id))
+			if($object)
 			{
 				return $object;
 			}else
 			{
 				$message = array('message' =>'Object not found');
 				return Response::json($message);
-			}	
+			}
 		}
 		else
 		{
 			$message = array('message' =>'Missing parameters');
 			return Response::json($message);
-		}		
-		
+		}	
 	}
 
 	/**
@@ -84,9 +70,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$id = Request::get('id');
-		
-		$object = Category::find($id);
+		//
 	}
 
 	/**
