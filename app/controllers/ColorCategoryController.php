@@ -59,37 +59,26 @@ class ColorCategoryController extends \BaseController {
 	 *
 	 * @param  int  $id
 	 * @return Response
-	 */
-	public function show($id)
-	{
-		
-		//print_r(Input::all());
-		
-		if(Input::has('id'))
-		{
-			$id = Request::get('id');
-		
-			$object =  ColorCategory::find($id);
-			
-			if($object)
-			{
-				$tpl = new stdClass;
-				$tpl->color = $object;
-				
-				return View::make('entities.color.show',(array)$tpl);
-			}else
-			{
-				$message = array('message' =>'Object not found');
-				return Response::json($message);
-			}
-		}
-		else
-		{
-			$message = array('message' =>'Missing parameters');
-			return Response::json($message);
-		}	
-	}
+	*/	 
 
+	public function show()
+	{
+		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
+		
+		$object =  ColorCategory::find($id);
+		
+		if($object)
+		{
+			$tpl = new stdClass;
+			$tpl->color = $object;
+				
+			return View::make('entities.color.show',(array)$tpl);
+		}else
+		{
+			$message = array('message' =>'Object not found');
+			return Response::json($message);
+		}
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -98,18 +87,32 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
+		$object =  ColorCategory::find($id);			
+		
+		if($object)
+		{
+			$tpl = new stdClass;
+			$tpl->color = $object;				
+			return View::make('entities.color.edit',(array)$tpl);
+		}else
+		{
+			$message = array('message' =>'Object not found');
+			return Response::json($message);
+		}		
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $idl
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input =  Input::all();
+		$result = ColorCategory::find($input['id'])->update($input);		
+		return Redirect::route('color.index');		
 	}
 
 	/**
@@ -118,9 +121,15 @@ class ColorCategoryController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		$input = (object)Input::all();
+		
+		$object = $this->color->find($input->id);
+		
+		$object->delete();
+		
+		return Redirect::route('color.index');		
 	}
 
 }

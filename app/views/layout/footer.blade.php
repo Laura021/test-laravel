@@ -1,5 +1,5 @@
     <footer>
-        <p>&copy; Company 2013</p>
+        <p>&copy; Chewing Code 2013</p>
     </footer>
     </div> <!-- /container -->        
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

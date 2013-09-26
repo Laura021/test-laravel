@@ -92,3 +92,10 @@ Route::resource('/category', 'CategoryController');
 
 Route::resource('/color', 'ColorCategoryController');
 
+/*Route::get('color/{id}', 'ColorCategoryController@show');
+
+
+Route::get('color/{id}', function($id)
+{
+  return ColorCategory::find($id);
+});*/
