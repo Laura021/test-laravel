@@ -1,16 +1,22 @@
 <?php
 
 class CategoryController extends \BaseController {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	
+	protected $category; 
+	 
+	public function __contruct()
+	{
+		$this->category =  new Category;
+	}
+	
+	
 	public function index()
 	{
 		//This go and get the rlation info for eachr object, this is the equivalent od call all, and the query the id of the relation
-		return Category::with('ColorCategory')->get();	
+		$tpl = new stdClass;		
+		$tpl->category = Category::with('ColorCategory')->get();	
+		
+		return View::make('entities.category.index', (array)$tpl);
 	}
 
 	/**
@@ -20,7 +26,12 @@ class CategoryController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$tpl = new stdClass;
+		
+		$tpl->category = $this->category;
+		$tpl->color_category =  DB::table('color_category')->lists('title', 'id');
+
+		return View::make('entities.category.create',(array)$tpl);
 	}
 
 	/**
@@ -29,20 +40,15 @@ class CategoryController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		$category						= new Category;
-		$category->name 				= Request::get('name');
-		$category->points 				= Request::get('points');
-		$category->color_category_id 	= 1;
+	{	
+		$input = Input::all();
+
+		$input['color_category_id'] = intval($input['color_category_id']);
+
+		$category = new Category;
 		
-		$category->save();
-				
-		var_dump($category->save());
-		var_dump($category->errors()->all());
-		
-		/*return Response::json(array(
-			'category' =>$category)
-		 );*/
+		$category->create($input);
+		return Redirect::route('category.index');
 	}
 
 	/**
@@ -53,40 +59,44 @@ class CategoryController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		if(Input::has('id'))
-		{
-			$id = Request::get('id');
+		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
 		
-			$object =  Category::with('ColorCategory')->where('id', '=', $id)->get();		
+		$object = Category::with('ColorCategory')->where('id', '=', $id)->get();	
+		
+		//return $object;	
+		if($object->contains($id))
+		{
+			$tpl 			= new stdClass;
+			$tpl->category 	= $object->first();
 			
-			if($object->contains($id))
-			{
-				return $object;
-			}else
-			{
-				$message = array('message' =>'Object not found');
-				return Response::json($message);
-			}	
+			return View::make('entities.category.show', (array)$tpl);
+
+		}else
+		{
+			$message = array('message' => 'Object not found');
+			return Response::json($message);
+		}	
+	}
+
+	public function edit($id)
+	{
+		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
+		$object = Category::find($id);
+		
+		if ($object)
+		{
+			$tpl 					= new stdClass;
+			$tpl->category 			= $object;
+			$tpl->color_category 	=  DB::table('color_category')->lists('title', 'id');
+							
+			return View::make('entities.category.edit',(array)$tpl);
 		}
 		else
 		{
-			$message = array('message' =>'Missing parameters');
+			$message = array('message' =>'Object not found');
 			return Response::json($message);
-		}		
+		}
 		
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$id = Request::get('id');
-		
-		$object = Category::find($id);
 	}
 
 	/**
@@ -97,7 +107,10 @@ class CategoryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input  = Input::all();
+
+		$result = Category::find($input['id'])->update($input);		
+		return Redirect::route('category.index');		
 	}
 
 	/**
@@ -108,7 +121,16 @@ class CategoryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$category = new Category;
+		
+		$input = Input::all();
+		
+		$object = $this->category->find($input->id);
+		
+		$object->delete();
+		
+		return $object;
+		//return Redirect::route('category.index');		
 	}
 
 }

@@ -26,4 +26,4 @@
     		</div>
 		 {{ Form::close() }}		
 		  <hr>
-	@stopl
+	@stop

@@ -67,15 +67,16 @@ class ColorCategoryController extends \BaseController {
 		
 		$object =  ColorCategory::find($id);
 		
-		if($object)
+		if ($object)
 		{
 			$tpl = new stdClass;
 			$tpl->color = $object;
 				
-			return View::make('entities.color.show',(array)$tpl);
-		}else
+			return View::make('entities.color.show', (array)$tpl);
+		}
+		else
 		{
-			$message = array('message' =>'Object not found');
+			$message = array('message' => 'Object not found');
 			return Response::json($message);
 		}
 	}
@@ -87,15 +88,16 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
-		$object =  ColorCategory::find($id);			
+		$id     = Request::segment(2) ? intval(Request::segment(2)) : 0;
+		$object = ColorCategory::find($id);			
 		
-		if($object)
+		if ($object)
 		{
 			$tpl = new stdClass;
 			$tpl->color = $object;				
 			return View::make('entities.color.edit',(array)$tpl);
-		}else
+		}
+		else
 		{
 			$message = array('message' =>'Object not found');
 			return Response::json($message);
@@ -110,7 +112,7 @@ class ColorCategoryController extends \BaseController {
 	 */
 	public function update()
 	{
-		$input =  Input::all();
+		$input  = Input::all();
 		$result = ColorCategory::find($input['id'])->update($input);		
 		return Redirect::route('color.index');		
 	}
