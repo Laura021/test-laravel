@@ -1,0 +1,3 @@
+//Define namespace 
+
+window.myApp = {};

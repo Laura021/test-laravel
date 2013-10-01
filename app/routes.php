@@ -18,6 +18,10 @@ Route::get('/', function()
 	//return 'Hello!';
 });
 
+Route::get('/testo', function(){
+	//return View::make('test.test');
+	return View::make('test.test2');
+});
 
 Route::get('/testModel', function(){
 	//Test users model.
