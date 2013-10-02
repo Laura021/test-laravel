@@ -1,6 +1,4 @@
-(function (myApp){
-	
-	function Product(){
+function Product(){
 		var self = this;
 		
 		self.sku 			= ko.observable('');
@@ -17,6 +15,3 @@
 		});	
 	};
 	
-	myApp.Product = Product;
-	
-}(window.myApp));

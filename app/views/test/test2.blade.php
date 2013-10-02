@@ -1,7 +1,7 @@
 @extends('layout.master')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type='text/javascript' src='/js/vendor/knockout-2.3.0.js'></script>
-<script type='text/javascript' src='/js/App.js'></script>
+<script type='text/javascript' src='/js/ProductsViewModel.js'></script>
 @section('body')
 	
 	<div id="productListVIew">
@@ -43,11 +43,11 @@
 							
 		<button type="button" 
 				data-bind="click: removeProduct, 
-				visible:(selectedProduct() ? false: true )"	> Remove </button>
+				visible:(selectedProduct() ? true: false )"	> Remove </button>
 				
 		<button type="button" 
 				data-bind="click: doneEditingProduct,   
-							visible:(selectedProduct() ? false: true )"	>Done</button>
+							visible:(selectedProduct() ? true: false )"	>Done</button>
 	</div>
 		
 
@@ -55,12 +55,14 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		var app  = new myApp.App();
-		//console.log("App "+app.run());
-		app.run();
-	});
-
 	
+	
+	$(document).ready(function(){
+		
+		var vm = new ProductsViewModel();		
+
+		ko.applyBindings(vm);
+	});
+		
 </script>
 
