@@ -16,6 +16,11 @@
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
+            
+            .form-horizontal{
+            	margin-top: 1%;
+            }
+            
         </style>
         @section('head')
 	        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -55,15 +60,18 @@
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
+          <div id="accessForm" class="pull-right">
+          	@if(Auth::check())	
+          		<button class="btn btn-danger">Logout</button>
+          	@else
+          	{{ Form::open(array('url' => 'login','class' => 'form-horizontal pull-right','role'=>'form')) }}
+				{{ Form::text('username',null,array('placeholder'=>'username'))  }}
+				{{ Form::password('password',array('placeholder'=>'password')) }}
+			 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+			{{ Form::close() }}
+			@endif
+          	</div>
+
         </div><!--/.navbar-collapse -->
       </div>
     </div>

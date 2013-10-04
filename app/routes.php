@@ -10,14 +10,46 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', function()
-{
+Route::get('/',array('as' => 'home', function(){
 	return View::make('layout.index');
-	//return View::make('hello');
-	//return 'Hello!';
+}));
+
+
+Event::listen('404', function()
+{
+    return Response::error('404');
 });
 
+Route::resource('/photo', 'PhotoController');
+
+Route::resource('/category', 'CategoryController');
+
+Route::resource('/color', 'ColorCategoryController');
+
+/*** Login logic ***/
+Route::get('/login', array('as' => 'login', function(){
+	return View::make('login');
+}))->before('guest');
+
+Route::post('login', function(){
+	$user = array(  'username' => Input::get('username'),
+					'password' => Input::get('password'));
+					
+	if(Auth::attempt($user)){
+		return Redirect::route('home')->with('flash_notice','You are successfully logged in.');
+	}
+});
+
+Route::get('logout',  array('as' => 'logout', function(){
+	Auth::logout();
+	
+	return Redirect::route('home')->with('flash_notice','You are successfully logged out.');
+	
+}))->before('auth');
+
+Route::get('profile', array('as' => 'profile', function(){}))->before('auth');
+
+/***  Test logic ****/
 Route::get('/testo', function(){
 	//return View::make('test.test');
 	return View::make('test.test2');
@@ -84,22 +116,3 @@ Route::get('/testModel', function(){
 	
 	
 });
-
-Event::listen('404', function()
-{
-    return Response::error('404');
-});
-
-Route::resource('/photo', 'PhotoController');
-
-Route::resource('/category', 'CategoryController');
-
-Route::resource('/color', 'ColorCategoryController');
-
-/*Route::get('color/{id}', 'ColorCategoryController@show');
-
-
-Route::get('color/{id}', function($id)
-{
-  return ColorCategory::find($id);
-});*/
