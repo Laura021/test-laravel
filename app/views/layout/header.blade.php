@@ -16,10 +16,48 @@
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
-            
-            .form-horizontal{
+            #accessForm
+            {
             	margin-top: 1%;
+            	min-width : 500px;
+            	float: right!important;
             }
+            .form-horizontal
+            {
+            	max-width : 417px;
+            }
+            #login
+            {
+            	float: right!important;
+            	margin-left: 10px;
+            }
+            
+            #signup
+            {
+            	float: right!important;
+            }
+            #login-content 
+			{
+				min-width : 300px;
+			    position: absolute;
+			    z-index: 0;
+			    text-align: center;
+			}
+			
+			#login-content:before
+			{
+			    content: '';
+			    position: absolute;
+			    z-index: -1;
+			    border: 1px dashed #ccc;
+			    top: 5px;
+			    bottom: 5px;
+			    left: 5px;
+			    right: 5px;
+			    -moz-box-shadow: 0 0 0 1px #fff;
+			    -webkit-box-shadow: 0 0 0 1px #fff;
+			    box-shadow: 0 0 0 1px #fff;
+			}
             
         </style>
         @section('head')
@@ -27,8 +65,10 @@
 	        <link rel="stylesheet" href="/css/main.css">
 	        <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
          @show
+         
     </head>
     <body>
+    	
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -60,18 +100,30 @@
               </ul>
             </li>
           </ul>
-          <div id="accessForm" class="pull-right">
-          	@if(Auth::check())	
-          		<button class="btn btn-danger">Logout</button>
-          	@else
-          	{{ Form::open(array('url' => 'login','class' => 'form-horizontal pull-right','role'=>'form')) }}
-				{{ Form::text('username',null,array('placeholder'=>'username'))  }}
-				{{ Form::password('password',array('placeholder'=>'password')) }}
-			 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
-			{{ Form::close() }}
-			@endif
-          	</div>
-
+          <div id="accessForm">          	
+          	<ul>
+          		<li id="login">        			  			
+		          @if(Auth::check())	
+			       	<a href="logout"><button class="btn btn-danger">Logout</button></a>
+			      @else
+			        <a id="login-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Login<span class="caret"></span></a>      
+			        <div class="dropdown-menu" id="login-content">			         	
+			          	<h3>Welcome back!</h3>
+			          	{{ Form::open(array('url' => 'login','id' => 'login-form','class' => 'form-horizontal','role'=>'form')) }}
+							{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
+							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
+						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+						{{ Form::close() }}	
+						</div>		
+				@endif
+          			
+          		</li>
+          		<li id="signup">
+          			<a class="btn btn-info pull-right"  href="">Sign up</a>
+          		</li>
+          	</ul>
+          		          
+          </div><!--/.access form -->
         </div><!--/.navbar-collapse -->
       </div>
     </div>

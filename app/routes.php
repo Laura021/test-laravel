@@ -32,11 +32,13 @@ Route::get('/login', array('as' => 'login', function(){
 }))->before('guest');
 
 Route::post('login', function(){
-	$user = array(  'username' => Input::get('username'),
+	$user = array(  'email' => Input::get('email'),
 					'password' => Input::get('password'));
 					
 	if(Auth::attempt($user)){
-		return Redirect::route('home')->with('flash_notice','You are successfully logged in.');
+		return Redirect::route('home');
+	}else{
+		return Redirect::route('home')->with('flash_notice','An error has occurred, please try again.');;
 	}
 });
 
