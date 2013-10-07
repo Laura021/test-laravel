@@ -1,0 +1,47 @@
+
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            #accessForm
+            {
+            	margin-top: 1%;
+            	min-width : 500px;
+            	float: right!important;
+            }
+            .form-horizontal
+            {
+            	max-width : 417px;
+            }
+            #login
+            {
+            	float: right!important;
+            	margin-left: 10px;
+            }
+            
+            #signup
+            {
+            	float: right!important;
+            }
+            .popup-content 
+			{
+				min-width : 300px;
+			    position: absolute;
+			    z-index: 0;
+			    text-align: center;
+			}
+			
+			.dashed-content:before
+			{
+			    content: '';
+			    position: absolute;
+			    z-index: -1;
+			    border: 1px dashed #ccc;
+			    top: 5px;
+			    bottom: 5px;
+			    left: 5px;
+			    right: 5px;
+			    -moz-box-shadow: 0 0 0 1px #fff;
+			    -webkit-box-shadow: 0 0 0 1px #fff;
+			    box-shadow: 0 0 0 1px #fff;
+			}

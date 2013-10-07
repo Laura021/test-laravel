@@ -26,34 +26,41 @@ Route::resource('/category', 'CategoryController');
 
 Route::resource('/color', 'ColorCategoryController');
 
-/*** Login logic ***/
+
+
+/*** Login ***/
 Route::get('/login', array('as' => 'login', function(){
 	return View::make('login');
 }))->before('guest');
 
-Route::post('login', function(){
-	$user = array(  'email' => Input::get('email'),
-					'password' => Input::get('password'));
-					
-	if(Auth::attempt($user)){
-		return Redirect::route('home');
-	}else{
-		return Redirect::route('home')->with('flash_notice','An error has occurred, please try again.');;
-	}
-});
+
+Route::post('login',array('uses' => 'AuthController@login'));
 
 Route::get('logout',  array('as' => 'logout', function(){
-	Auth::logout();
-	
-	return Redirect::route('home')->with('flash_notice','You are successfully logged out.');
-	
+	Auth::logout();	
+	return Redirect::route('home')->with('flash_notice','You are successfully logged out.');	
 }))->before('auth');
 
+
+/*** SignUp ***/
+
+Route::get('/signup', array('as' => 'signup', function(){
+	return View::make('signup2');
+}));
+
+Route::post('signup',array('uses' => 'AuthController@signup'));
+
+Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
+
+Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
+
+/*** Others ***/
 Route::get('profile', array('as' => 'profile', function(){}))->before('auth');
+
+
 
 /***  Test logic ****/
 Route::get('/testo', function(){
-	//return View::make('test.test');
 	return View::make('test.test2');
 });
 

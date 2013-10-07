@@ -11,55 +11,7 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-            #accessForm
-            {
-            	margin-top: 1%;
-            	min-width : 500px;
-            	float: right!important;
-            }
-            .form-horizontal
-            {
-            	max-width : 417px;
-            }
-            #login
-            {
-            	float: right!important;
-            	margin-left: 10px;
-            }
-            
-            #signup
-            {
-            	float: right!important;
-            }
-            #login-content 
-			{
-				min-width : 300px;
-			    position: absolute;
-			    z-index: 0;
-			    text-align: center;
-			}
-			
-			#login-content:before
-			{
-			    content: '';
-			    position: absolute;
-			    z-index: -1;
-			    border: 1px dashed #ccc;
-			    top: 5px;
-			    bottom: 5px;
-			    left: 5px;
-			    right: 5px;
-			    -moz-box-shadow: 0 0 0 1px #fff;
-			    -webkit-box-shadow: 0 0 0 1px #fff;
-			    box-shadow: 0 0 0 1px #fff;
-			}
-            
-        </style>
+        <link rel="stylesheet" href="/css/custom.css">
         @section('head')
 	        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 	        <link rel="stylesheet" href="/css/main.css">
@@ -107,7 +59,7 @@
 			       	<a href="logout"><button class="btn btn-danger">Logout</button></a>
 			      @else
 			        <a id="login-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Login<span class="caret"></span></a>      
-			        <div class="dropdown-menu" id="login-content">			         	
+			        <div class="dropdown-menu popup-content dashed-content" id="login-content">			         	
 			          	<h3>Welcome back!</h3>
 			          	{{ Form::open(array('url' => 'login','id' => 'login-form','class' => 'form-horizontal','role'=>'form')) }}
 							{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
@@ -118,8 +70,17 @@
 				@endif
           			
           		</li>
-          		<li id="signup">
-          			<a class="btn btn-info pull-right"  href="">Sign up</a>
+          		<li id="signup">  
+          			<a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
+          			 <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
+			          	<h3>Get started!</h3>
+			          	{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
+							{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
+							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
+						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+						{{ Form::close() }}	
+					</div>	
+          			
           		</li>
           	</ul>
           		          
