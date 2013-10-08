@@ -23,6 +23,13 @@
             {
             	float: right!important;
             }
+            
+            #profile
+            {
+            	float: right!important;
+            	max-width : 100px;
+            }
+           
             .popup-content 
 			{
 				min-width : 300px;

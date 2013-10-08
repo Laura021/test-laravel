@@ -53,11 +53,14 @@
             </li>
           </ul>
           <div id="accessForm">          	
-          	<ul>
-          		<li id="login">        			  			
-		          @if(Auth::check())	
+          	<ul>         		        			  			
+		       @if(Auth::check())
+		          <li id="profile"> <a href="/profile" style ="color: white">User's name!</a></li>
+		          <li id="login">
 			       	<a href="logout"><button class="btn btn-danger">Logout</button></a>
-			      @else
+			      </li>
+			   @else
+			     <li id="login">	
 			        <a id="login-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Login<span class="caret"></span></a>      
 			        <div class="dropdown-menu popup-content dashed-content" id="login-content">			         	
 			          	<h3>Welcome back!</h3>
@@ -66,10 +69,8 @@
 							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
 						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
 						{{ Form::close() }}	
-						</div>		
-				@endif
-          			
-          		</li>
+						</div>	
+				</li>	          		
           		<li id="signup">  
           			<a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
           			 <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
@@ -79,11 +80,11 @@
 							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
 						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
 						{{ Form::close() }}	
-					</div>	
-          			
+					</div>	         			
           		</li>
-          	</ul>
-          		          
+          		@endif
+          		
+          	</ul>       		          
           </div><!--/.access form -->
         </div><!--/.navbar-collapse -->
       </div>

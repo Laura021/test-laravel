@@ -45,7 +45,7 @@ Route::get('logout',  array('as' => 'logout', function(){
 /*** SignUp ***/
 
 Route::get('/signup', array('as' => 'signup', function(){
-	return View::make('signup2');
+	return View::make('signup');
 }));
 
 Route::post('signup',array('uses' => 'AuthController@signup'));
@@ -54,7 +54,7 @@ Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
 
 Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
 
-/*** Others ***/
+/*** Profile ***/
 Route::get('profile', array('as' => 'profile', function(){}))->before('auth');
 
 

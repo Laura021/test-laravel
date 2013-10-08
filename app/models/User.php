@@ -19,8 +19,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
-	protected $fillable = array('username', 'email','bio','title');
+//	protected $hidden = array('password');
+	protected $fillable = array('username', 'email','bio','title','password');
 
 
 
@@ -67,8 +67,9 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	 */
 	
 	public static $rules = array(
-		'username' =>'required|between:5,20|alpha_num',
-		'email'=> 'required|email',	
+		'username' 	=> 'required|between:5,20|alpha_num|unique:users',
+		'email'		=> 'required|email|unique:users',
+		'password' 	=> 'required',
 	);	
 		
 		

@@ -4,6 +4,7 @@
 <script type='text/javascript' src='/js/ViewModel/UserViewModel.js'></script>
 
 	@section('body')
+	 	@include('layout.alert')
     <div class="popup-content dashed-content" id="signup-content">			         	
 		<h3>Get started!</h3>
 		 	{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
@@ -14,13 +15,3 @@
 			{{ Form::close() }}	
 	</div>			
 	@stop
-	
-<script type="text/javascript">
-		
-	$(document).ready(function(){		
-		//var vm = new UserViewModel();		
-		
-		ko.applyBindings(new UserViewModel());
-	});
-		
-</script>
