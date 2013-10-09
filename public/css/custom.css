@@ -29,6 +29,12 @@
             	float: right!important;
             	max-width : 100px;
             }
+	    
+	    .main-container
+	    {
+		margin-top: 1%;
+		margin-left: 9%;
+	    }
            
             .popup-content 
 			{

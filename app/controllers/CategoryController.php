@@ -13,8 +13,9 @@ class CategoryController extends \BaseController {
 	public function index()
 	{
 		//This go and get the rlation info for eachr object, this is the equivalent od call all, and the query the id of the relation
-		$tpl = new stdClass;		
-		$tpl->category = Category::with('ColorCategory')->get();	
+		$tpl 		= new stdClass;		
+		$tpl->category  = Category::with('ColorCategory')->get();
+		$tpl->route 	= $this->getController();
 		
 		return View::make('entities.category.index', (array)$tpl);
 	}
@@ -28,8 +29,9 @@ class CategoryController extends \BaseController {
 	{
 		$tpl = new stdClass;
 		
-		$tpl->category = $this->category;
-		$tpl->color_category =  DB::table('color_category')->lists('title', 'id');
+		$tpl->category 		= $this->category;
+		$tpl->color_category 	=  DB::table('color_category')->lists('title', 'id');
+		$tpl->route 		= $this->getController();
 
 		return View::make('entities.category.create',(array)$tpl);
 	}
@@ -66,8 +68,9 @@ class CategoryController extends \BaseController {
 		//return $object;	
 		if($object->contains($id))
 		{
-			$tpl 			= new stdClass;
+			$tpl 		= new stdClass;
 			$tpl->category 	= $object->first();
+			$tpl->route 	= $this->getController();
 			
 			return View::make('entities.category.show', (array)$tpl);
 
@@ -85,9 +88,10 @@ class CategoryController extends \BaseController {
 		
 		if ($object)
 		{
-			$tpl 					= new stdClass;
-			$tpl->category 			= $object;
+			$tpl 			= new stdClass;
+			$tpl->category 		= $object;
 			$tpl->color_category 	=  DB::table('color_category')->lists('title', 'id');
+			$tpl->route 		= $this->getController();
 							
 			return View::make('entities.category.edit',(array)$tpl);
 		}
@@ -110,6 +114,7 @@ class CategoryController extends \BaseController {
 		$input  = Input::all();
 
 		$result = Category::find($input['id'])->update($input);		
+		
 		return Redirect::route('category.index');		
 	}
 
@@ -131,6 +136,11 @@ class CategoryController extends \BaseController {
 		
 		return $object;
 		//return Redirect::route('category.index');		
+	}
+	
+	public function getController()
+	{
+	  return Route::currentRouteName();
 	}
 
 }

@@ -18,11 +18,11 @@ class ColorCategoryController extends \BaseController {
 	 
 	public function index()
 	{
-		$tpl = new stdClass;
+	      $tpl = new stdClass;
+	      $tpl->colors =  $this->color->all();	
+	      $tpl->route  =  $this->getController();
 		
-		$tpl->colors =  $this->color->all();
-		
-		return View::make('entities.color.index',(array)$tpl);
+	      return View::make('entities.color.index',(array)$tpl);
 		
 	}
 
@@ -34,8 +34,8 @@ class ColorCategoryController extends \BaseController {
 	public function create()
 	{
 		$tpl = new stdClass;
-		
 		$tpl->color = $this->color;
+		$tpl->route = $this->getController();
 				
 		return View::make('entities.color.create',(array)$tpl);
 	}
@@ -63,6 +63,9 @@ class ColorCategoryController extends \BaseController {
 
 	public function show()
 	{
+	  
+	  //return Route::getCurrentRoute()->getPath();
+	  
 		$id = Request::segment(2) ? intval(Request::segment(2)) : 0;
 		
 		$object =  ColorCategory::find($id);
@@ -71,6 +74,7 @@ class ColorCategoryController extends \BaseController {
 		{
 			$tpl = new stdClass;
 			$tpl->color = $object;
+			$tpl->route = $this->getController();
 				
 			return View::make('entities.color.show', (array)$tpl);
 		}
@@ -133,5 +137,9 @@ class ColorCategoryController extends \BaseController {
 		
 		return Redirect::route('color.index');		
 	}
-
+	
+	public function getController()
+	{
+	  return Route::currentRouteName();
+	}
 }

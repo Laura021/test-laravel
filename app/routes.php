@@ -55,9 +55,7 @@ Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
 Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
 
 /*** Profile ***/
-Route::get('profile', array('as' => 'profile', function(){}))->before('auth');
-
-
+Route::get('profile', array('uses' => 'UserController@profile'))->before('auth');
 
 /***  Test logic ****/
 Route::get('/testo', function(){

@@ -19,8 +19,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-//	protected $hidden = array('password');
-	protected $fillable = array('username', 'email','bio','title','password');
+	protected $hidden = array('password');
+	protected $fillable = array('username', 'email','bio','title');
 
 
 

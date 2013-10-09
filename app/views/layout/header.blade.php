@@ -32,57 +32,45 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">TEST</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/color">Colors</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+            <li class=" @if( str_contains(Route::currentRouteName(), 'home')) {{ 'active'; }} @else {{ '' }}@endif"><a href="/">Home</a></li>
+            <li class=" @if( str_contains(Route::currentRouteName(), 'color')) {{ 'active'; }} @else {{ '' }}@endif" ><a href="/color"> Colors</a></li>
+	    <li class=" @if( str_contains(Route::currentRouteName(), 'category')) {{ 'active'; }} @else {{ '' }}@endif" ><a href="/category"> Category</a></li>
           </ul>
           <div id="accessForm">          	
           	<ul>         		        			  			
-		       @if(Auth::check())
-		          <li id="profile"> <a href="/profile" style ="color: white">User's name!</a></li>
-		          <li id="login">
-			       	<a href="logout"><button class="btn btn-danger">Logout</button></a>
-			      </li>
-			   @else
-			     <li id="login">	
-			        <a id="login-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Login<span class="caret"></span></a>      
-			        <div class="dropdown-menu popup-content dashed-content" id="login-content">			         	
-			          	<h3>Welcome back!</h3>
-			          	{{ Form::open(array('url' => 'login','id' => 'login-form','class' => 'form-horizontal','role'=>'form')) }}
-							{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
-							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
-						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
-						{{ Form::close() }}	
-						</div>	
-				</li>	          		
+		    @if(Auth::check())
+		        <li id="profile"> <a href="/profile" style ="color: white">{{ Auth::user()->username }} </a></li>
+		        <li id="login">
+			    <a href="logout"><button class="btn btn-danger">Logout</button></a>
+			</li>
+		    @else
+			<li id="login">	
+		            <a id="login-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Login<span class="caret"></span></a>      
+			    <div class="dropdown-menu popup-content dashed-content" id="login-content">			         	
+				<h3>Welcome back!</h3>
+				{{ Form::open(array('url' => 'login','id' => 'login-form','class' => 'form-horizontal','role'=>'form')) }}
+				{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
+				{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
+				{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+				{{ Form::close() }}	
+			    </div>	
+			</li>	          		
           		<li id="signup">  
-          			<a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
-          			 <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
-			          	<h3>Get started!</h3>
-			          	{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
-							{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
-							{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
-						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
-						{{ Form::close() }}	
-					</div>	         			
+          		    <a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
+          		    <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
+			        <h3>Get started!</h3>
+				{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
+				{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
+				{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
+				{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+				{{ Form::close() }}	
+			    </div>	         			
           		</li>
-          		@endif
+          	    @endif
           		
           	</ul>       		          
           </div><!--/.access form -->
