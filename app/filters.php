@@ -59,7 +59,28 @@ Route::filter('auth.basic', function()
 Route::filter('guest', function()
 {
 	if (Auth::check()) 
-		return Redirect::route('/')->with('flash_notice', 'You are already logged in!!');
+		return Redirect::route('home')->with('flash_notice', 'You are already logged in!!');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin Filter
+|--------------------------------------------------------------------------
+*/
+
+Route::filter('admin', function()
+{
+	if ( Auth::check() )
+	{
+		if(Auth::user()->is_super_user == 0)
+		{
+			return Redirect::route('home')->with('flash_notice', 'You dont have enough permissions !!');
+		}		
+	}else{
+		return Redirect::route('home')->with('flash_notice', 'You need to log in!!');
+	}
+	
 });
 
 /*

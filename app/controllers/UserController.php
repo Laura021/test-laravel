@@ -82,7 +82,7 @@ class UserController extends \BaseController {
 	
 	public function profile()
 	{
-		 //print_r(Auth::user()->username);
+		//print_r(Auth::user());
 		//print_r(Session::all());
 		return View::make('entities.user.profile');
 	}

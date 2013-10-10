@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 Route::get('/',array('as' => 'home', function(){
 	return View::make('layout.index');
 }));
@@ -22,10 +23,16 @@ Event::listen('404', function()
 
 Route::resource('/photo', 'PhotoController');
 
-Route::resource('/category', 'CategoryController');
+Route::resource('/fact', 'FactController');
 
-Route::resource('/color', 'ColorCategoryController');
+/***** Grant access only to admin users *****/
 
+Route::group(array('before'=> 'admin'), function(){
+		
+	Route::resource('/category', 'CategoryController');
+	
+	Route::resource('/color', 'ColorCategoryController');
+});
 
 
 /*** Login ***/

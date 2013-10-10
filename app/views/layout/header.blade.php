@@ -36,11 +36,12 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class=" @if( str_contains(Route::currentRouteName(), 'home')) {{ 'active'; }} @else {{ '' }}@endif"><a href="/">Home</a></li>
-            <li class=" @if( str_contains(Route::currentRouteName(), 'color')) {{ 'active'; }} @else {{ '' }}@endif" ><a href="/color"> Colors</a></li>
-	    <li class=" @if( str_contains(Route::currentRouteName(), 'category')) {{ 'active'; }} @else {{ '' }}@endif" ><a href="/category"> Category</a></li>
+            <li class=" @if( str_contains(Route::currentRouteName(), 'home'))     {{ 'active'; }} @else {{ '' }}@endif" ><a href="/">Home</a></li>
+            <li class=" @if( str_contains(Route::currentRouteName(), 'color'))    {{ 'active'; }} @else {{ '' }}@endif" ><a href="/color"> Colors</a></li>
+	    	<li class=" @if( str_contains(Route::currentRouteName(), 'category')) {{ 'active'; }} @else {{ '' }}@endif" ><a href="/category"> Category</a></li>
+	    	<li class=" @if( str_contains(Route::currentRouteName(), 'fact'))     {{ 'active'; }} @else {{ '' }}@endif" ><a href="/fact"> Facts</a></li>
           </ul>
-          <div id="accessForm">          	
+          <div id="accessForm">          	 
           	<ul>         		        			  			
 		    @if(Auth::check())
 		        <li id="profile"> <a href="/profile" style ="color: white">{{ Auth::user()->username }} </a></li>
@@ -63,11 +64,12 @@
           		    <a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
           		    <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
 			        <h3>Get started!</h3>
-				{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
-				{{ Form::text('email',null,array('placeholder'=>'email', 'style' => 'margin-top: 15px;'))  }}<br /><br />
-				{{ Form::password('password',array('placeholder'=>'password')) }}<br /><br />
-				{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
-				{{ Form::close() }}	
+						{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
+				     	{{ Form::text('username',null,array('placeholder'=>'username', 'style' => 'margin-top: 15px;', 'data-bind' =>'value: username'))  }}<br /><br />	
+						{{ Form::text('email',null,array('placeholder'=>'email','data-bind' =>'value: email'))  }}<br /><br />
+						{{ Form::password('password',array('placeholder'=>'password', 'data-bind' =>'value: password')) }}<br /><br />
+					 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+					{{ Form::close() }}	
 			    </div>	         			
           		</li>
           	    @endif

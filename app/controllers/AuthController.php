@@ -47,7 +47,8 @@ class AuthController extends \BaseController
 				$errors_text .= $e;	
 			}
 			
-			return Redirect::route('signup')->with('flash_notice',$errors_text);
+			return Redirect::route('home')->with('flash_notice',$errors_text);
+			//return Redirect::route('signup')->with('flash_notice',$errors_text);
 		}
 		
 		// now the user is created, redirect him/her to the home view but, logged.
