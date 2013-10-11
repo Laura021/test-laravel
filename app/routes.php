@@ -25,6 +25,11 @@ Route::resource('/photo', 'PhotoController');
 
 Route::resource('/fact', 'FactController');
 
+Route::resource('/user', 'UserController');
+
+/*** Profile ***/
+Route::get('/profile', array('uses' => 'UserController@profile'))->before('auth');
+
 /***** Grant access only to admin users *****/
 
 Route::group(array('before'=> 'admin'), function(){
@@ -61,9 +66,6 @@ Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
 
 Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
 
-/*** Profile ***/
-Route::get('profile', array('uses' => 'UserController@profile'))->before('auth');
-
 /***  Test logic ****/
 Route::get('/testo', function(){
 	return View::make('test.test2');
@@ -77,7 +79,7 @@ Route::get('/testModel', function(){
 	$user->username = 'testUser1';
 	$user->email	= 'laura.com';
 	$user->title	= 'noob';
-	$user->bio		= 'Just some word about your life and bla bla';
+	$user->bio	= 'Just some word about your life and bla bla';
 	
 	//var_dump($user->save());
 	//var_dump($user->errors()->all());
@@ -85,8 +87,8 @@ Route::get('/testModel', function(){
 	
 	echo "Color_category: ";
 	
-	$color_category					= new ColorCategory;
-	$color_category->title 			= 'BlueFive';
+	$color_category			= new ColorCategory;
+	$color_category->title 		= 'BlueFive';
 	$color_category->description	= 'Things realted to the sea';
 	
 	//var_dump($color_category->save());
@@ -94,7 +96,7 @@ Route::get('/testModel', function(){
 	echo "</br></br>";
 	
 	echo "Category: ";
-	$category			= new Category;
+	$category		= new Category;
 	$category->name 	= 'First Category';
 	$category->points 	= '10';
 	$category->color_category_id = 1;
@@ -104,9 +106,9 @@ Route::get('/testModel', function(){
 	echo "</br></br>";
 	
 	echo "Titles";
-	$title 				= new Title;
+	$title 			= new Title;
 	$title->title 		= 'Dr.Goku';
-	$title->description = 'What dr Goku is capable of';
+	$title->description 	= 'What dr Goku is capable of';
 	$title->points 		= 50;	
 	
 	var_dump($title->save());

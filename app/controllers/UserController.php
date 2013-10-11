@@ -55,7 +55,7 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+
 	}
 
 	/**
@@ -64,9 +64,9 @@ class UserController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		print_r(Input::all());
 	}
 
 	/**
@@ -82,8 +82,12 @@ class UserController extends \BaseController {
 	
 	public function profile()
 	{
-		//print_r(Auth::user());
-		//print_r(Session::all());
-		return View::make('entities.user.profile');
+		$tpl = new stdClass;
+		$tpl->user = Auth::user();
+		
+		print_r(Auth::user()->password);
+		
+		//$tpl->user = new User;
+		//return View::make('entities.user.profile',(array)$tpl);
 	}
 }
