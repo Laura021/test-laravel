@@ -85,9 +85,9 @@ class UserController extends \BaseController {
 		$tpl = new stdClass;
 		$tpl->user = Auth::user();
 		
-		print_r(Auth::user()->password);
+		//print_r(Auth::user()->password);
 		
-		//$tpl->user = new User;
-		//return View::make('entities.user.profile',(array)$tpl);
+		$tpl->user = new User;
+		return View::make('entities.user.profile',(array)$tpl);
 	}
 }

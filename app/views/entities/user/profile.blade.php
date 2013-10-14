@@ -56,7 +56,7 @@
 				<div id='password-container'> 
 					<div class="form-group">
 						<div class="col-lg-6"><label class="control-label">Actual Password: </label></div>
-						<div class="col-lg-4"><input id="actual_password" name="actual-password"  type="text"  data-bind="value: actual_pass"  /></div>
+						<div class="col-lg-4"><input id="actual_password" name="actual-password"  type="password"  data-bind="value: actual_pass"  /></div>
 					</div>
 					<div class="form-group">
 						<div class="col-lg-6"><label class="control-label">New Password: </label></div>
@@ -71,13 +71,12 @@
 							<img   id="pass-integrity-no"  style="width: 20px;" src="/images/no.png" />
 						</div>
 					</div>
-						
-					<div class="form-group">
-						<div class="col-lg-6"></div>
-						<div class="col-lg-4"><input class="btn btn-info" type="submit" value="Edit"/></div>
-					</div>
 				</div>
-					
+				
+				<div class="form-group">
+					<div class="col-lg-6"></div>
+					<div class="col-lg-4"><input id="btnSubmit"class="btn btn-info" type="submit" value="Edit"/></div>
+				</div>	
 				
 				
 			</form>
@@ -99,8 +98,21 @@
 
 		$("#setNewPassword").click(function(){
 			$("#password-container").toggle();
-		});	
+		});
+			
 	});
+	
+	function testPassword()
+	{
+		console.log('calando la contraseña con el servidor chalalala');
+		
+		$.get( 
+			"/pass", 
+			{ email: "{{ Auth::user()->email }}", password: actual_pass() }, 
+			function( data ) {
+  				alert( "Data Loaded: " + data );
+  			});
+	}
 	
 	
 	

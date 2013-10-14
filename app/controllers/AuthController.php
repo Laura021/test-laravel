@@ -10,7 +10,7 @@ class AuthController extends \BaseController
 		if(Auth::attempt($user)){
 			return Redirect::route('home');
 		}else{
-			return Redirect::route('home')->with('flash_notice','An error has occurred, please try again.');;
+			return Redirect::route('home')->with('flash_notice','An error has occurred, please try again.');
 		}
 	}
 	
@@ -84,6 +84,18 @@ class AuthController extends \BaseController
 		//Validate userame in real time.
 		
 		
+	}
+	
+	public function validatePassword()
+	{
+		$user = array(  'email' => Input::get('email'),
+						'password' => Input::get('password'));
+						
+		if(Auth::attempt($user)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 }

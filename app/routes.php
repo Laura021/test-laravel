@@ -66,10 +66,14 @@ Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
 
 Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
 
-/***  Test logic ****/
+/***  Test ****/
 Route::get('/testo', function(){
 	return View::make('test.test2');
 });
+
+Route::get('/pass',array('uses' => 'AuthController@validatePassword'));
+
+Route::get('/passtest',array('uses' => 'AuthController@validatePasswordTest'));
 
 Route::get('/testModel', function(){
 	//Test users model.
