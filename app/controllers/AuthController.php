@@ -92,9 +92,9 @@ class AuthController extends \BaseController
 						'password' => Input::get('password'));
 						
 		if(Auth::attempt($user)){
-			return true;
+			return 'true';
 		}else{
-			return false;
+			return 'false';
 		}
 	}
 	

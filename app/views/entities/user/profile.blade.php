@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 				  <div class="col-lg-3"><label class="control-label">Email</label></div>
-				  <div class="col-lg-7"><p class="form-control-static">{{ Auth::user()->email }}</p></div>
+				  <div class="col-lg-7"><p class="form-control-static"> <span data-bind="value: email">{{ Auth::user()->email }}</span></p></div>
 				</div>
 				@if(Auth::user()->is_super_user)
 				<div class="form-group">
@@ -56,16 +56,21 @@
 				<div id='password-container'> 
 					<div class="form-group">
 						<div class="col-lg-6"><label class="control-label">Actual Password: </label></div>
-						<div class="col-lg-4"><input id="actual_password" name="actual-password"  type="password"  data-bind="value: actual_pass"  /></div>
+						<div class="col-lg-5"><input id="actual_password" name="actualpassword"  type="password"  data-bind="value: actual_pass"  /></div>
+						<div class="col-lg-1">
+							<img   id="email-integrity-yes" style="width: 20px;" src="/images/yes.png" />
+							<img   id="email-integrity-no"  style="width: 20px;" src="/images/no.png" />
+						</div>
+						
 					</div>
 					<div class="form-group">
 						<div class="col-lg-6"><label class="control-label">New Password: </label></div>
-						<div class="col-lg-4"><input id="new_pass" name="new-pass" type="password"  data-bind="value: new_pass"  /></div>
+						<div class="col-lg-4"><input id="new_pass" name="newpass" type="password"  data-bind="value: new_pass"  /></div>
 					</div>
 						
 					<div class="form-group">
 						<div class="col-lg-6"><label class="control-label">Confirm new password: </label></div>
-						<div class="col-lg-5"><input id="new_pass_2" name="new-pass-2" type="password"   data-bind="value: new_pass_2" /></div>
+						<div class="col-lg-5"><input id="new_pass_2" name="newpass2" type="password"   data-bind="value: new_pass_2" /></div>
 						<div class="col-lg-1">
 							<img   id="pass-integrity-yes" style="width: 20px;" src="/images/yes.png" />
 							<img   id="pass-integrity-no"  style="width: 20px;" src="/images/no.png" />
@@ -87,33 +92,21 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
-	
-		var vm = new PasswordViewModel();		
+		var mail = '<?php echo Auth::user()->email ?>';
+		var vm   = new PasswordViewModel();		
 
 		ko.applyBindings(vm);
-	
+		vm.setEmail(mail);
+		
 		$("#password-container").hide();
 		$("#pass-integrity-yes").hide();
 		$("#pass-integrity-no").hide();
+		$("#email-integrity-yes").hide();
+		$("#email-integrity-no").hide();
 
 		$("#setNewPassword").click(function(){
 			$("#password-container").toggle();
 		});
 			
-	});
-	
-	function testPassword()
-	{
-		console.log('calando la contraseña con el servidor chalalala');
-		
-		$.get( 
-			"/pass", 
-			{ email: "{{ Auth::user()->email }}", password: actual_pass() }, 
-			function( data ) {
-  				alert( "Data Loaded: " + data );
-  			});
-	}
-	
-	
-	
+	});	
 </script>

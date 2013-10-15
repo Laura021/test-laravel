@@ -66,7 +66,24 @@ class UserController extends \BaseController {
 	 */
 	public function update()
 	{
-		print_r(Input::all());
+		$input = Input::all();
+		
+		if($input['actualpassword'] == '')
+		{
+			unset($input['actualpassword']);
+			unset($input['newpass']);
+			unset($input['newpass2']);
+		}else
+		{
+			$input->password = Hash::make($input['newpass']);
+			unset($input['actualpassword']);
+			unset($input['newpass']);
+			unset($input['newpass2']);
+		}
+		
+		$result = User::find($input['id'])->update($input);		
+		
+		return Redirect::route('home')->with('flash_notice','Profile updated');	
 	}
 
 	/**
@@ -84,8 +101,6 @@ class UserController extends \BaseController {
 	{
 		$tpl = new stdClass;
 		$tpl->user = Auth::user();
-		
-		//print_r(Auth::user()->password);
 		
 		$tpl->user = new User;
 		return View::make('entities.user.profile',(array)$tpl);
