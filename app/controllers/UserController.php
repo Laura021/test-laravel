@@ -66,23 +66,32 @@ class UserController extends \BaseController {
 	 */
 	public function update()
 	{
-		$input = Input::all();
+		//Fix this.
 		
+		$input 	= Input::all();
+	
 		if($input['actualpassword'] == '')
-		{
+		{	
 			unset($input['actualpassword']);
 			unset($input['newpass']);
 			unset($input['newpass2']);
+			
 		}else
 		{
-			$input->password = Hash::make($input['newpass']);
+			$input['password'] = Hash::make($input['newpass']);
+			
 			unset($input['actualpassword']);
 			unset($input['newpass']);
 			unset($input['newpass2']);
 		}
 		
-		$result = User::find($input['id'])->update($input);		
+		unset($input['_token']);
+		unset($input['_method']);
 		
+		DB::table('users')
+            ->where('id', $input['id'])
+            ->update($input);
+	
 		return Redirect::route('home')->with('flash_notice','Profile updated');	
 	}
 

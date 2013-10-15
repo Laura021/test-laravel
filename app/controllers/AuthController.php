@@ -20,8 +20,7 @@ class AuthController extends \BaseController
 							'password' 	=> Input::get('password'),
 							'username' 	=> Input::get('username'),
 							'password' 	=> Input::has('password') ? Input::get('password') : null );
-							
-							
+												
 		$user 			= new User;
 		$user->username = $userData['username'];
 		$user->email	= $userData['email'];
@@ -73,10 +72,10 @@ class AuthController extends \BaseController
 		
 		$email_exists = User::where('email', '=', $form_email)->take(1)->get();
 		
-		var_dump($email_exists);
-		
-		return -1;
-		
+		if(count($email_exists)>0)
+			return 'true';
+		else 
+			return 'false';		
 	}
 	
 	public function validateUsername()

@@ -60,9 +60,9 @@ Route::get('/signup', array('as' => 'signup', function(){
 	return View::make('signup');
 }));
 
-Route::post('signup',array('uses' => 'AuthController@signup'));
+Route::post('/signup',array('uses' => 'AuthController@signup'));
 
-Route::post('signup/email',array('uses' => 'AuthController@validateEmail'));
+Route::get('/signup/email',array('uses' => 'AuthController@validateEmail'));
 
 Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
 
@@ -71,7 +71,7 @@ Route::get('/testo', function(){
 	return View::make('test.test2');
 });
 
-Route::get('/pass',array('uses' => 'AuthController@validatePassword'));
+Route::post('/pass',array('uses' => 'AuthController@validatePassword'));
 
 Route::get('/passtest',array('uses' => 'AuthController@validatePasswordTest'));
 

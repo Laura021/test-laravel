@@ -16,6 +16,9 @@
 	        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 	        <link rel="stylesheet" href="/css/main.css">
 	        <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	        <script type='text/javascript' src='/js/vendor/knockout-2.3.0.js'></script>
+			<script type='text/javascript' src='/js/ViewModel/EmailViewModel.js'></script>
          @show
          
     </head>
@@ -64,12 +67,12 @@
           		    <a id="signup-trigger" class="btn btn-info pull-right dropdown-toggle"  data-toggle="dropdown" href="">Sign up<span class="caret"></span></a>          			 
           		    <div class="dropdown-menu popup-content dashed-content" id="signup-content">			         	
 			        <h3>Get started!</h3>
-						{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
-				     	{{ Form::text('username',null,array('placeholder'=>'username', 'style' => 'margin-top: 15px;', 'data-bind' =>'value: username'))  }}<br /><br />	
-						{{ Form::text('email',null,array('placeholder'=>'email','data-bind' =>'value: email'))  }}<br /><br />
-						{{ Form::password('password',array('placeholder'=>'password', 'data-bind' =>'value: password')) }}<br /><br />
-					 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
-					{{ Form::close() }}	
+					 	{{ Form::open(array('url' => 'signup','id' => 'signup-form','class' => 'form-horizontal','role'=>'form')) }}
+					     	{{ Form::text('username',null,array('placeholder'=>'username', 'style' => 'margin-top: 15px;', 'data-bind' =>'value: username'))  }}<br /><br />	
+							{{ Form::text('email',null,array('placeholder'=>'email','data-bind' =>'value: email'))  }}<br /><br />
+							{{ Form::password('password',array('placeholder'=>'password', 'data-bind' =>'value: password')) }}<br /><br />
+						 	{{ Form::submit('Login',array('class' => 'btn btn-primary')) }}
+						{{ Form::close() }}	
 			    </div>	         			
           		</li>
           	    @endif
