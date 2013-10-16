@@ -30,6 +30,8 @@ Route::resource('/user', 'UserController');
 /*** Profile ***/
 Route::get('/profile', array('uses' => 'UserController@profile'))->before('auth');
 
+Route::get('/pass',array('uses' => 'AuthController@validatePassword'));
+
 /***** Grant access only to admin users *****/
 
 Route::group(array('before'=> 'admin'), function(){
@@ -44,7 +46,6 @@ Route::group(array('before'=> 'admin'), function(){
 Route::get('/login', array('as' => 'login', function(){
 	return View::make('login');
 }))->before('guest');
-
 
 Route::post('login',array('uses' => 'AuthController@login'));
 
@@ -64,16 +65,15 @@ Route::post('/signup',array('uses' => 'AuthController@signup'));
 
 Route::get('/signup/email',array('uses' => 'AuthController@validateEmail'));
 
-Route::post('signup/username',array('uses' => 'AuthController@validateUsername'));
+Route::get('/signup/username',array('uses' => 'AuthController@validateUsername'));
 
 /***  Test ****/
 Route::get('/testo', function(){
 	return View::make('test.test2');
 });
 
-Route::post('/pass',array('uses' => 'AuthController@validatePassword'));
 
-Route::get('/passtest',array('uses' => 'AuthController@validatePasswordTest'));
+
 
 Route::get('/testModel', function(){
 	//Test users model.

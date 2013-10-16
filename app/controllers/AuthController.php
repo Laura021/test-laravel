@@ -60,17 +60,16 @@ class AuthController extends \BaseController
 		}else{
 			return Redirect::route('home')->with('flash_notice','An error has occurred, please try again.');;
 		}
-		
-		//var_dump($user->save());
-		//var_dump($user->errors()->all());
 	}
 	
 	public function validateEmail()
 	{
 		//Validate user's email in real time
-		$form_email = Input::get('email');
-		
-		$email_exists = User::where('email', '=', $form_email)->take(1)->get();
+		$email_exists 	= 0;
+		$form_email 	= Input::get('email');
+			
+		if($form_email != '')
+			$email_exists 	= User::where('email', '=', $form_email)->take(1)->get();
 		
 		if(count($email_exists)>0)
 			return 'true';
@@ -81,8 +80,17 @@ class AuthController extends \BaseController
 	public function validateUsername()
 	{
 		//Validate userame in real time.
+		$username_exists 	= 0;
+		$username 			= Input::get('username');
 		
+		if($username != '')
+			$username_exists = User::where('username', '=', $username)->take(1)->get();
 		
+		if(count($username_exists)>0)
+			return 'true';
+		else 
+			return 'false';
+			
 	}
 	
 	public function validatePassword()
